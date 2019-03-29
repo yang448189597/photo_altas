@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:photo_atlas/Pages/pitcture_detail.dart';
+import 'package:photo_atlas/Pages/pitcture_all.dart';
+import 'package:photo_atlas/Pages/pitcture_day.dart';
+import 'package:photo_atlas/Pages/pitcture_week.dart';
 
 class PicturePage extends StatefulWidget {
   @override
@@ -32,9 +34,9 @@ class PicturePageState extends State<PicturePage>
       body: TabBarView(
           controller:_controller,
           children: <Widget>[
-            MyHomePage(),
-            MyHomePage(),
-            MyHomePage(),
+            DayPage(),
+            WeekPage(),
+            AllPage(),
           ]
       ),
     );
