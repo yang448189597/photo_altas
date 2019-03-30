@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
-
-const todayBaseUrl = 'http://47.52.142.42:8080/today';
-const weekBaseUrl = 'http://47.52.142.42:8080/week';
+const todayBaseUrl = 'http://192.168.1.4:8080/today';
+const weekBaseUrl = 'http://192.168.1.4:8080/today';
 const allBaseUrl = 'http://47.52.142.42:8080/all';
 
 const Map<String, String> apiHeaders = {

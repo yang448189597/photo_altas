@@ -13,8 +13,7 @@ class HomePage extends StatelessWidget {
         child:   RaisedButton(
         onPressed: (){
           Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-//                    return new PicturePreviewPage(title: '路由是个好东西，要进一步封装');
-            return new CarouselWithIndicator();
+            return new PicturePreview();
           }));
         },
         child: Text("浮动按钮"),

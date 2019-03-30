@@ -48,7 +48,7 @@ class WeekPageState extends State<WeekPage> with AutomaticKeepAliveClientMixin {
                 onTap: (){
 
                   Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-                    return new CarouselWithIndicator();
+                    return new PicturePreview(pictureId: _datalist[index]['id'].toString(),);
                   }));
 
                   Fluttertoast.showToast(
@@ -77,7 +77,7 @@ class WeekPageState extends State<WeekPage> with AutomaticKeepAliveClientMixin {
                         bottom: 10.0,
                         child: Text(_datalist[index]['title'],
                             style: TextStyle(
-                                fontSize: 13, color: Color(0xFFffffff))),
+                                fontWeight: FontWeight.bold,fontSize: 14, color: Color(0xFFffffff))),
                       ),
                     ],
                   ),
