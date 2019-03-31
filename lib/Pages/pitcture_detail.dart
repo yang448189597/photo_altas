@@ -53,9 +53,7 @@ class _PicturePreviewState extends State<PicturePreview> {
     print('week' + 'id:' + widget.pictureId + _imgList.toString());
   }
 
-
-
-  Widget controlButton(CarouselSlider pictureSlider) {
+  Widget _controlButton(CarouselSlider pictureSlider) {
     return Row(children: [
       Expanded(
         child: Padding(
@@ -105,7 +103,7 @@ class _PicturePreviewState extends State<PicturePreview> {
   @override
   Widget build(BuildContext context) {
     // 图片轮播器
-    final pictureSlider = CarouselSlider(
+    final _pictureSlider = CarouselSlider(
       height: 600,
       items: map<Widget>(_imgList, (index, i) {
           return Container(
@@ -175,11 +173,11 @@ class _PicturePreviewState extends State<PicturePreview> {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-              pictureSlider,
+              _pictureSlider,
               Container(
                 padding: EdgeInsets.all(10.0),
               ),
-              controlButton(pictureSlider)
+              _controlButton(_pictureSlider)
             ]),
       ),
     );
