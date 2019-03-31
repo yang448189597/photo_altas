@@ -70,6 +70,7 @@ class WeekPageState extends State<WeekPage> with AutomaticKeepAliveClientMixin {
                           headers: apiHeaders,
                           fit: BoxFit.cover,
                           width: 350.0,
+                          filterQuality: FilterQuality.none,
                         ),
                       ),
                       Positioned(
