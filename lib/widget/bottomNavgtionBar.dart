@@ -66,7 +66,7 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
                   color: _bottomColor,
                 ),
                 title: Text(
-                  '设置',
+                  '我的',
                   style: TextStyle(color: _bottomColor),
                 )),
           ],
