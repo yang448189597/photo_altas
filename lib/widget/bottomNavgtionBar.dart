@@ -45,7 +45,6 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.home,
-                  color: _bottomColor,
                 ),
                 title: Text(
                   '主页',
@@ -54,7 +53,6 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.picture_in_picture,
-                  color: _bottomColor,
                 ),
                 title: Text(
                   '美女',
@@ -63,7 +61,6 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.settings,
-                  color: _bottomColor,
                 ),
                 title: Text(
                   '我的',
@@ -73,6 +70,8 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
 
           //  底部导航索引
           currentIndex: _currentIndex,
+
+          fixedColor: Colors.red,
 
           //  添加底部导航的点击事件
           onTap: (int index){
