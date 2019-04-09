@@ -4,9 +4,9 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:photo_atlas/API/api_host.dart';
+import 'package:photo_atlas/widget/favoriteWidget.dart';
 
 final Widget placeholder = new Container(color: Colors.grey);
-
 
 List<T> map<T>(List list, Function handler) {
   List<T> result = [];
@@ -16,7 +16,6 @@ List<T> map<T>(List list, Function handler) {
   }
   return result;
 }
-
 
 class PicturePreview extends StatefulWidget {
   PicturePreview({this.pictureId});
@@ -34,11 +33,9 @@ class _PicturePreviewState extends State<PicturePreview> {
 
   @override
   void initState() {
-
     dioRequest();
     super.initState();
   }
-
 
   Future dioRequest() async {
     Dio dio = new Dio();
@@ -63,7 +60,7 @@ class _PicturePreviewState extends State<PicturePreview> {
                 duration: Duration(milliseconds: 300), curve: Curves.linear),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0)),
-            color: Colors.black,
+            color: Colors.red[300],
             padding: EdgeInsets.all(0.0),
             child: new Text('上一页'),
             textColor: Colors.white,
@@ -84,7 +81,7 @@ class _PicturePreviewState extends State<PicturePreview> {
                 duration: Duration(milliseconds: 300), curve: Curves.linear),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0)),
-            color: Colors.black,
+            color: Colors.red[300],
             padding: EdgeInsets.all(0.0),
             child: new Text('下一页'),
             textColor: Colors.white,
@@ -105,7 +102,9 @@ class _PicturePreviewState extends State<PicturePreview> {
     // 图片轮播器
     final _pictureSlider = CarouselSlider(
       height: 600,
-      items: map<Widget>(_imgList, (index, i) {
+      items: map<Widget>(
+        _imgList,
+        (index, i) {
           return Container(
             margin: EdgeInsets.all(5.0),
             child: ClipRRect(
@@ -138,7 +137,7 @@ class _PicturePreviewState extends State<PicturePreview> {
                     child: Text(
                       'No. $index',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.red[300],
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -162,20 +161,59 @@ class _PicturePreviewState extends State<PicturePreview> {
       },
     );
 
+    // downLoad button
+    Row buildButtonRow(IconData icon, String label) {
+      Color color = Colors.white;
+
+      return new Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            color: color,
+          ),
+          new Container(
+            padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
+            child: new Text(
+              label,
+              style: new TextStyle(
+                fontSize: 12.0,
+                fontWeight: FontWeight.w400,
+                color: color,
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
     return Scaffold(
       appBar: new AppBar(
         // 去掉导航栏下面的阴影
         title: new Text('妹子图'),
       ),
       body: Container(
+        color: Colors.black,
         alignment: Alignment.bottomCenter,
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
               _pictureSlider,
-              Container(
-                padding: EdgeInsets.all(10.0),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 8, 18, 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    new FavoriteWidget(),
+
+                    Container(
+                      padding: EdgeInsets.all(8.0),
+                    ),
+                    buildButtonRow(Icons.file_download, '下载')
+                  ],
+                ),
               ),
               _controlButton(_pictureSlider)
             ]),
