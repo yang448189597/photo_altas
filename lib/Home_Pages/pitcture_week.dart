@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:photo_atlas/Pages/pitcture_detail.dart';
 import 'package:photo_atlas/API/api_host.dart';
+import 'package:photo_atlas/Home_Pages/pitcture_detail.dart';
 
 class WeekPage extends StatefulWidget {
   @override

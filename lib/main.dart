@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:photo_atlas/widget/bottomNavgtionBar.dart';
+import 'package:photo_atlas/Home_Widget/bottomNavgtionBar.dart';
 
 void main() => runApp(MyApp());
 

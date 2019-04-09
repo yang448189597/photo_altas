@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:photo_atlas/Pages/pitcture_detail.dart';
+import 'package:photo_atlas/Home_Pages/pitcture_detail.dart';
 
 class HomePage extends StatelessWidget {
   @override

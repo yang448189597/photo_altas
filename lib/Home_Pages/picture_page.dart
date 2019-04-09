@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:photo_atlas/Pages/pitcture_all.dart';
-import 'package:photo_atlas/Pages/pitcture_day.dart';
-import 'package:photo_atlas/Pages/pitcture_week.dart';
+import 'package:photo_atlas/Home_Pages/pitcture_all.dart';
+import 'package:photo_atlas/Home_Pages/pitcture_day.dart';
+import 'package:photo_atlas/Home_Pages/pitcture_week.dart';
 
 class PicturePage extends StatefulWidget {
   @override

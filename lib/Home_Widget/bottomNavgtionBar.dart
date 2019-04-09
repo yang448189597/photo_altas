@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:photo_atlas/Pages/home_page.dart';
-import 'package:photo_atlas/Pages/picture_page.dart';
-import 'package:photo_atlas/Pages//settings_page.dart';
+import 'package:photo_atlas/Home_Pages/home_page.dart';
+import 'package:photo_atlas/Home_Pages/picture_page.dart';
+import 'package:photo_atlas/Home_Pages/settings_page.dart';
 
 // Demo 2
 class BottomBar extends StatelessWidget {

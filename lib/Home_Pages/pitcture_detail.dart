@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:photo_atlas/API/api_host.dart';
-import 'package:photo_atlas/widget/favoriteWidget.dart';
+import 'package:photo_atlas/Home_Widget/favoriteWidget.dart';
 
 final Widget placeholder = new Container(color: Colors.grey);
 
