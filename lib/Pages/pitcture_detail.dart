@@ -62,7 +62,7 @@ class _PicturePreviewState extends State<PicturePreview> {
                 borderRadius: BorderRadius.circular(10.0)),
             color: Colors.red[300],
             padding: EdgeInsets.all(0.0),
-            child: new Text('上一页'),
+            child: new Text('上一张'),
             textColor: Colors.white,
             textTheme: ButtonTextTheme.normal,
             highlightColor: Colors.red,
@@ -83,7 +83,7 @@ class _PicturePreviewState extends State<PicturePreview> {
                 borderRadius: BorderRadius.circular(10.0)),
             color: Colors.red[300],
             padding: EdgeInsets.all(0.0),
-            child: new Text('下一页'),
+            child: new Text('下一张'),
             textColor: Colors.white,
             textTheme: ButtonTextTheme.normal,
             highlightColor: Colors.red,
@@ -162,9 +162,8 @@ class _PicturePreviewState extends State<PicturePreview> {
     );
 
     // downLoad button
-    Row buildButtonRow(IconData icon, String label) {
+    Widget _downLoadBtnRow(IconData icon, String label) {
       Color color = Colors.white;
-
       return new Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -207,11 +206,10 @@ class _PicturePreviewState extends State<PicturePreview> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     new FavoriteWidget(),
-
                     Container(
                       padding: EdgeInsets.all(8.0),
                     ),
-                    buildButtonRow(Icons.file_download, '下载')
+                    _downLoadBtnRow(Icons.file_download, '下载')
                   ],
                 ),
               ),

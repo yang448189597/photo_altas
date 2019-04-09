@@ -37,60 +37,66 @@ class WeekPageState extends State<WeekPage> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: RefreshIndicator(
-          child: ListView.separated(
-            separatorBuilder: (BuildContext context, int index) => new Divider(
-                  color: Colors.white,
-                ),
-            itemCount: _datalist.length,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: (){
-
-                  Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-                    return new PicturePreview(pictureId: _datalist[index]['id'].toString(),);
-                  }));
-
-                  Fluttertoast.showToast(
-                      msg: '点击了第'+_datalist[index]['id'].toString(),
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.CENTER,
-                      textColor: Colors.black,
-                      backgroundColor: Colors.white12);
-                },
-                child: Container(
-                  alignment: AlignmentDirectional.center,
-                  child: Stack(
-                    alignment: AlignmentDirectional.bottomStart,
-                    children: <Widget>[
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.network(
-                          _datalist[index]['image'],
-                          headers: apiHeaders,
-                          fit: BoxFit.cover,
-                          width: 350.0,
-                          filterQuality: FilterQuality.none,
-                        ),
-                      ),
-                      Positioned(
-                        left: 10.0,
-                        bottom: 10.0,
-                        child: Text(_datalist[index]['title'],
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,fontSize: 14, color: Color(0xFFffffff))),
-                      ),
-                    ],
+      body: Padding(
+        padding: const EdgeInsets.only(top:15.0),
+        child: RefreshIndicator(
+            child: ListView.separated(
+              separatorBuilder: (BuildContext context, int index) => new Divider(
+                    color: Colors.white,
                   ),
-                ),
-              );
-            },
-          ),
-          onRefresh: () {
-            // _datalist.clear();
-            // dioRequest();
-          }
-          ),
+              itemCount: _datalist.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.of(context)
+                        .push(new MaterialPageRoute(builder: (context) {
+                      return new PicturePreview(
+                        pictureId: _datalist[index]['id'].toString(),
+                      );
+                    }));
+
+                    Fluttertoast.showToast(
+                        msg: '点击了第' + _datalist[index]['id'].toString(),
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        textColor: Colors.black,
+                        backgroundColor: Colors.white12);
+                  },
+                  child: Container(
+                    alignment: AlignmentDirectional.center,
+                    child: Stack(
+                      alignment: AlignmentDirectional.bottomStart,
+                      children: <Widget>[
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.network(
+                            _datalist[index]['image'],
+                            headers: apiHeaders,
+                            fit: BoxFit.cover,
+                            width: 350.0,
+                            filterQuality: FilterQuality.none,
+                          ),
+                        ),
+                        Positioned(
+                          left: 10.0,
+                          bottom: 10.0,
+                          child: Text(_datalist[index]['title'],
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                  color: Color(0xFFffffff))),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+            onRefresh: () {
+              // _datalist.clear();
+              // dioRequest();
+            }),
+      ),
     );
   }
 
