@@ -1,16 +1,12 @@
-# photo_atlas
+Flutter App
 
-A new Flutter application.
+描述：
+加载网络图片的app
 
-## Getting Started
+所使用的三方库：
+网络加载 dio: ^2.0.0
+图片轮播控件 carousel_slider: ^1.3.0
+fluttertoast: ^3.0.1
+shared_preferences: ^0.5.2
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
