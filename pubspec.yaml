@@ -32,6 +32,8 @@ dependencies:
 
   fluttertoast: ^3.0.1
 
+  shared_preferences: ^0.5.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

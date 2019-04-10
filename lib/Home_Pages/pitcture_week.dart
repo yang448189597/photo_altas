@@ -51,7 +51,7 @@ class WeekPageState extends State<WeekPage> with AutomaticKeepAliveClientMixin {
                     Navigator.of(context)
                         .push(new MaterialPageRoute(builder: (context) {
                       return new PicturePreview(
-                        pictureId: _datalist[index]['id'].toString(),
+                        pictureUrl: weekBaseUrl + "/" + _datalist[index]['id'].toString(),
                       );
                     }));
 
@@ -74,7 +74,7 @@ class WeekPageState extends State<WeekPage> with AutomaticKeepAliveClientMixin {
                             headers: apiHeaders,
                             fit: BoxFit.cover,
                             width: 350.0,
-                            filterQuality: FilterQuality.none,
+                            filterQuality: FilterQuality.low,
                           ),
                         ),
                         Positioned(
