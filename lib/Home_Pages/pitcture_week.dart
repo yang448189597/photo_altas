@@ -51,7 +51,9 @@ class WeekPageState extends State<WeekPage> with AutomaticKeepAliveClientMixin {
                     Navigator.of(context)
                         .push(new MaterialPageRoute(builder: (context) {
                       return new PicturePreview(
+                        // 传递一组图片Url 和 图片标题
                         pictureUrl: weekBaseUrl + "/" + _datalist[index]['id'].toString(),
+                        pictureTitle: _datalist[index]['title'],
                       );
                     }));
 

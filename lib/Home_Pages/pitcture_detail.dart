@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:photo_atlas/API/api_host.dart';
 import 'package:photo_atlas/Home_Widget/favoriteWidget.dart';
+import 'package:photo_atlas/Model/Favorite.dart';
 
 final Widget placeholder = new Container(color: Colors.grey);
 
@@ -18,9 +19,10 @@ List<T> map<T>(List list, Function handler) {
 }
 
 class PicturePreview extends StatefulWidget {
-  PicturePreview({this.pictureUrl});
-
   final String pictureUrl;
+  final String pictureTitle;
+
+  PicturePreview({this.pictureUrl, this.pictureTitle});
 
   @override
   _PicturePreviewState createState() => _PicturePreviewState();
@@ -38,7 +40,6 @@ class _PicturePreviewState extends State<PicturePreview> {
   }
 
   Future dioRequest() async {
-
     Dio dio = new Dio();
     Response response = await dio.get(widget.pictureUrl);
     print('statusCode:' + response.statusCode.toString());
@@ -206,7 +207,9 @@ class _PicturePreviewState extends State<PicturePreview> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    new FavoriteWidget(pictureUrl: widget.pictureUrl),
+                    new FavoriteWidget(
+                    favorite: new Favorite(widget.pictureUrl,widget.pictureTitle),
+                    ),
                     Container(
                       padding: EdgeInsets.all(8.0),
                     ),

@@ -23,8 +23,6 @@ class DayPageState extends State<DayPage> with AutomaticKeepAliveClientMixin {
     print('statusCode:' + response.statusCode.toString());
     Map<String, dynamic> ret = json.decode(response.data);
 
-    //  List dataList = ret['data'];
-
     setState(() {
       _datalist = ret['data'];
     });
