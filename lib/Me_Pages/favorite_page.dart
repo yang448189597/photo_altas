@@ -1,21 +1,40 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FavoriteList extends StatefulWidget {
-
   @override
   FavoriteListState createState() => new FavoriteListState();
 }
 
 class FavoriteListState extends State<FavoriteList> {
-  final List<String> data = [];
+  List<String> _data = [];
+
+  Future<List<String>> getStringList() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    try {
+      List<String> listUrl = prefs.getStringList("pictureUrl");
+      print('listurl' + listUrl.toString());
+      return listUrl;
+    } catch (e) {
+      return null;
+    }
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    for (int i = 0; i < 10; i++) {
-      data.add(i.toString());
-    }
+//    for (int i = 0; i < 10; i++) {
+//      data.add(i.toString());
+//    }
+
+    getStringList().then((List<String> list) {
+      setState(() {
+        _data = list == null ? [] : list;
+      });
+    });
   }
 
   @override
@@ -32,14 +51,15 @@ class FavoriteListState extends State<FavoriteList> {
                 color: Colors.white,
               ),
           itemBuilder: (BuildContext context, int index) {
-            String itemDat = data[index];
+            String itemDat = _data[index];
+            Map<String, dynamic> data = json.decode(_data[index]);
 
             return Dismissible(
               key: new Key(itemDat),
               onDismissed: (direction) {
-                data.removeAt(index);
+                _data.removeAt(index);
                 Scaffold.of(context).showSnackBar(
-                    new SnackBar(content: new Text("$data dismissed")));
+                    new SnackBar(content: new Text("$_data dismissed")));
               },
               background: new Container(
                 color: Colors.red,
@@ -70,8 +90,7 @@ class FavoriteListState extends State<FavoriteList> {
                       children: <Widget>[
                         new Container(
                           height: 70.0,
-                          child:
-                              new Text('这是一张非常漂亮的美女图$itemDat，喜欢就赶紧来欣赏吧，等着你哦'),
+                          child: new Text(data['pictureListTitle'].toString()),
                         ),
                       ],
                     ),
@@ -81,7 +100,7 @@ class FavoriteListState extends State<FavoriteList> {
               ),
             );
           },
-          itemCount: data.length,
+          itemCount: _data.length,
         ),
       ),
     );

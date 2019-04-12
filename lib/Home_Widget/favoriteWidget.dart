@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:photo_atlas/Model/Favorite.dart';
@@ -49,7 +51,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
     getStringList().then((List<String> list) {
       setState(() {
         _urlList = list == null ? [] : list;
-        _isFavorite = _urlList.contains(widget.favorite.toJson().toString());
+        _isFavorite = _urlList.contains(json.encode(widget.favorite.toJson()));
         print('json:'+widget.favorite.toJson().toString());
         print(_isFavorite);
       });
@@ -63,7 +65,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
         if (_isFavorite) {
           _isFavorite = false;
 
-          _urlList.remove(widget.favorite.toJson().toString());
+          _urlList.remove(json.encode(widget.favorite.toJson()));
           print(_urlList);
           print(_urlList.length.toString());
 
@@ -78,7 +80,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
         } else {
           _isFavorite = true;
 
-          _urlList.add(widget.favorite.toJson().toString());
+          _urlList.add(json.encode(widget.favorite.toJson()));
           print(_urlList);
           print(_urlList.length.toString());
 
