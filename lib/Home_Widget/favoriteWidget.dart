@@ -17,39 +17,53 @@ class FavoriteWidget extends StatefulWidget {
 class _FavoriteWidgetState extends State<FavoriteWidget> {
   bool _isFavorite = false;
 
-  Future saveString(String url) async {
+  List<String> _urlList = new List();
+
+  Future saveString(List<String> list) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('pictureUrl', url);
+    await prefs.setStringList('pictureUrl', list);
+    print(list);
+    return;
   }
 
-  Future removeString() async {
+  Future<List<String>> getStringList() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove('pictureUrl');
+    try {
+      List<String> listUrl = prefs.getStringList("pictureUrl");
+      print('listurl' + listUrl.toString());
+      return listUrl;
+    } catch (e) {
+      return null;
+    }
   }
 
-  Future getString() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
 
-    setState(() {
-      String url = prefs.get('pictureUrl');
-      if(url == null){
-        url = '空';
-      }
-      print("shared preferences : -----------------------" + url);
+    print("shared preferences : -----------------------" + 'init');
+
+    getStringList().then((List<String> list) {
+      setState(() {
+        _urlList = list == null ? [] : list;
+      });
     });
-
   }
 
   @override
   Widget build(BuildContext context) {
-
     void _toggleFavorite() {
-
       setState(() {
         if (_isFavorite) {
           _isFavorite = false;
-          getString();
-         removeString();
+
+          _urlList.remove(widget.pictureUrl);
+          print(_urlList);
+          print(_urlList.length.toString());
+
+          saveString(_urlList);
+
           Fluttertoast.showToast(
               msg: "取消收藏",
               toastLength: Toast.LENGTH_SHORT,
@@ -58,8 +72,11 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
               backgroundColor: Colors.white12);
         } else {
           _isFavorite = true;
-          getString();
-          saveString(widget.pictureUrl);
+
+          _urlList.add(widget.pictureUrl);
+          print(_urlList);
+          print(_urlList.length.toString());
+
           Fluttertoast.showToast(
               msg: "添加至收藏列表",
               toastLength: Toast.LENGTH_SHORT,
