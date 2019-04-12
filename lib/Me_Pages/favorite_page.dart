@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:photo_atlas/API/api_host.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FavoriteList extends StatefulWidget {
@@ -76,13 +77,7 @@ class FavoriteListState extends State<FavoriteList> {
                         width: 130.0,
                         height: 80.0,
                         fit: BoxFit.cover,
-                        headers: {
-                          'Referer': 'http://www.mzitu.com/',
-                          'Accept-Language': 'zh-CN,zh;q=0.9,zh-TW;q=0.8',
-                          'Host': 'i.meizitu.net',
-                          'User-Agent':
-                              'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'
-                        },
+                        headers: apiHeaders,
                       ),
                     ),
                     margin: EdgeInsets.all(10.0),
