@@ -52,6 +52,8 @@ class FavoriteListState extends State<FavoriteList> {
               ),
           itemBuilder: (BuildContext context, int index) {
             String itemDat = _data[index];
+
+            //取出Json 字符串
             Map<String, dynamic> data = json.decode(_data[index]);
 
             return Dismissible(
@@ -70,7 +72,7 @@ class FavoriteListState extends State<FavoriteList> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(4),
                       child: new Image.network(
-                        'https://i.meizitu.net/thumbs/2019/03/177007_23d34_236.jpg',
+                        data['firstPictureUrl'],
                         width: 130.0,
                         height: 80.0,
                         fit: BoxFit.cover,

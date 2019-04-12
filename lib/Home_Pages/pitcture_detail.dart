@@ -19,10 +19,11 @@ List<T> map<T>(List list, Function handler) {
 }
 
 class PicturePreview extends StatefulWidget {
-  final String pictureUrl;
+  final String firstPictureUrl;
+  final String pictureListUrl;
   final String pictureTitle;
 
-  PicturePreview({this.pictureUrl, this.pictureTitle});
+  PicturePreview({this.firstPictureUrl,this.pictureListUrl, this.pictureTitle});
 
   @override
   _PicturePreviewState createState() => _PicturePreviewState();
@@ -41,7 +42,7 @@ class _PicturePreviewState extends State<PicturePreview> {
 
   Future dioRequest() async {
     Dio dio = new Dio();
-    Response response = await dio.get(widget.pictureUrl);
+    Response response = await dio.get(widget.pictureListUrl);
     print('statusCode:' + response.statusCode.toString());
     Map<String, dynamic> ret = json.decode(response.data);
 
@@ -49,7 +50,7 @@ class _PicturePreviewState extends State<PicturePreview> {
       _imgList = ret['images'];
     });
 
-    print('week' + 'id:' + widget.pictureUrl);
+    print('week' + 'id:' + widget.pictureListUrl);
   }
 
   Widget _controlButton(CarouselSlider pictureSlider) {
@@ -208,7 +209,7 @@ class _PicturePreviewState extends State<PicturePreview> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     new FavoriteWidget(
-                    favorite: new Favorite(widget.pictureUrl,widget.pictureTitle),
+                    favorite: new Favorite(widget.firstPictureUrl,widget.pictureListUrl,widget.pictureTitle),
                     ),
                     Container(
                       padding: EdgeInsets.all(8.0),

@@ -79,7 +79,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
               backgroundColor: Colors.white12);
         } else {
           _isFavorite = true;
-
+          // 转成json 字符串 存入
           _urlList.add(json.encode(widget.favorite.toJson()));
           print(_urlList);
           print(_urlList.length.toString());
