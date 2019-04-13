@@ -1,13 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:photo_atlas/Model/Favorite.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FavoriteWidget extends StatefulWidget {
-//  final String pictureUrl;
-//  final String pictureTittle;
   final Favorite favorite;
 
   FavoriteWidget({this.favorite});

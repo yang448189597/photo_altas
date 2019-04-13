@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:photo_atlas/API/api_host.dart';
 import 'package:photo_atlas/Home_Pages/pitcture_detail.dart';
@@ -26,11 +25,7 @@ class FavoriteListState extends State<FavoriteList> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-//    for (int i = 0; i < 10; i++) {
-//      data.add(i.toString());
-//    }
 
     getStringList().then((List<String> list) {
       setState(() {
@@ -61,6 +56,8 @@ class FavoriteListState extends State<FavoriteList> {
 
             return GestureDetector(
               onTap: () {
+
+                // 跳转 图片详情页面
                 Navigator.of(context)
                     .push(new MaterialPageRoute(builder: (context) {
                   return new PicturePreview(

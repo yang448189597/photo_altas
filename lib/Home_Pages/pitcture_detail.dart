@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'dart:convert';
@@ -6,6 +8,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:photo_atlas/API/api_host.dart';
 import 'package:photo_atlas/Home_Widget/favoriteWidget.dart';
 import 'package:photo_atlas/Model/Favorite.dart';
+
+import 'package:network_to_file_image/network_to_file_image.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 
 final Widget placeholder = new Container(color: Colors.grey);
 
@@ -23,7 +29,8 @@ class PicturePreview extends StatefulWidget {
   final String pictureListUrl;
   final String pictureTitle;
 
-  PicturePreview({this.firstPictureUrl,this.pictureListUrl, this.pictureTitle});
+  PicturePreview(
+      {this.firstPictureUrl, this.pictureListUrl, this.pictureTitle});
 
   @override
   _PicturePreviewState createState() => _PicturePreviewState();
@@ -33,6 +40,14 @@ class _PicturePreviewState extends State<PicturePreview> {
   int _current = 0;
 
   List _imgList = new List();
+
+  Future<File> file(String filename) async {
+    Directory dir = await getApplicationDocumentsDirectory();
+    print('dir:' + dir.toString());
+    String pathName = p.join(dir.path, filename);
+    print('pathName:' + pathName);
+    return File(pathName);
+  }
 
   @override
   void initState() {
@@ -171,8 +186,23 @@ class _PicturePreviewState extends State<PicturePreview> {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            icon,
+          IconButton(
+            icon: Icon(icon),
+            onPressed: () async {
+              print('----------download---------------start');
+              print('download picture');
+              print('url:' + _imgList[_current]);
+              print('----------download---------------end');
+              File temp = await file('aaa.png');
+              NetworkToFileImage(
+                  file: temp,
+                  url: _imgList[_current],
+                  debug: true,
+                  headers: apiHeaders,
+              processError: (error) {
+                    print(error);
+              });
+            },
             color: color,
           ),
           new Container(
@@ -209,7 +239,8 @@ class _PicturePreviewState extends State<PicturePreview> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     new FavoriteWidget(
-                    favorite: new Favorite(widget.firstPictureUrl,widget.pictureListUrl,widget.pictureTitle),
+                      favorite: new Favorite(widget.firstPictureUrl,
+                          widget.pictureListUrl, widget.pictureTitle),
                     ),
                     Container(
                       padding: EdgeInsets.all(8.0),
