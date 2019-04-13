@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:photo_atlas/API/api_host.dart';
+import 'package:photo_atlas/Home_Pages/pitcture_detail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FavoriteList extends StatefulWidget {
@@ -52,48 +53,63 @@ class FavoriteListState extends State<FavoriteList> {
                 color: Colors.white,
               ),
           itemBuilder: (BuildContext context, int index) {
+
             String itemDat = _data[index];
 
             //取出Json 字符串
             Map<String, dynamic> data = json.decode(_data[index]);
 
-            return Dismissible(
-              key: new Key(itemDat),
-              onDismissed: (direction) {
-                _data.removeAt(index);
-                Scaffold.of(context).showSnackBar(
-                    new SnackBar(content: new Text("$_data dismissed")));
+            return GestureDetector(
+              onTap: () {
+                Navigator.of(context)
+                    .push(new MaterialPageRoute(builder: (context) {
+                  return new PicturePreview(
+                    // 传递一组图片Url 和 图片标题
+                    firstPictureUrl: data['firstPictureUrl'],
+                    pictureListUrl: data['pictureListUrl'],
+                    pictureTitle: data['pictureListTitle'].toString(),
+                  );
+                }));
+
               },
-              background: new Container(
-                color: Colors.red,
-              ),
-              child: new Row(
-                children: <Widget>[
-                  new Container(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(4),
-                      child: new Image.network(
-                        data['firstPictureUrl'],
-                        width: 130.0,
-                        height: 80.0,
-                        fit: BoxFit.cover,
-                        headers: apiHeaders,
-                      ),
-                    ),
-                    margin: EdgeInsets.all(10.0),
-                  ),
-                  new Expanded(
-                    child: new Column(
-                      children: <Widget>[
-                        new Container(
-                          height: 70.0,
-                          child: new Text(data['pictureListTitle'].toString()),
+              child: Dismissible(
+                key: new Key(itemDat),
+                onDismissed: (direction) {
+                  _data.removeAt(index);
+                  Scaffold.of(context).showSnackBar(
+                      new SnackBar(content: new Text("$_data dismissed")));
+                },
+                background: new Container(
+                  color: Colors.red,
+                ),
+                child: new Row(
+                  children: <Widget>[
+                    new Container(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(4),
+                        child: new Image.network(
+                          data['firstPictureUrl'],
+                          width: 130.0,
+                          height: 80.0,
+                          fit: BoxFit.cover,
+                          headers: apiHeaders,
                         ),
-                      ],
+                      ),
+                      margin: EdgeInsets.all(10.0),
                     ),
-                    flex: 1,
-                  ),
-                ],
+                    new Expanded(
+                      child: new Column(
+                        children: <Widget>[
+                          new Container(
+                            height: 70.0,
+                            child: new Text(data['pictureListTitle'].toString()),
+                          ),
+                        ],
+                      ),
+                      flex: 1,
+                    ),
+                  ],
+                ),
               ),
             );
           },
