@@ -1,13 +1,70 @@
-import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:photo_atlas/API/api_host.dart';
-import 'package:photo_atlas/Home_Pages/pitcture_detail.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 
 class DownloadedPictureList extends StatefulWidget {
   @override
   DownloadedPictureListState createState() => new DownloadedPictureListState();
+}
+
+class PictureGridView extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => new GridViewState();
+}
+
+class GridViewState extends State {
+
+  List<FileSystemEntity> _files = [];
+  @override
+  void initState() {
+    super.initState();
+    loadDownloadImages();
+
+  }
+
+  @override
+  Widget build(BuildContext context) => new GridView.count(
+      primary: false,
+      padding: const EdgeInsets.all(8.0),
+      mainAxisSpacing: 8.0,
+      //竖向间距
+      crossAxisCount: 2,
+      //横向Item的个数
+      crossAxisSpacing: 8.0,
+      //横向间距
+      children: buildGridTileList(_files.length));
+
+  Future loadDownloadImages() async {
+    print('----------loadDownloadImages---------------start');
+
+
+    Directory dir = await getApplicationDocumentsDirectory();
+    String dirString = dir.path;
+    print('----------dirString---------------start' + dirString);
+    var directory = Directory(dirString);
+    print('----------directory---------------start' + directory.toString());
+    List<FileSystemEntity>  files  = directory.listSync();
+    print(files);
+    print('files length' + files.length.toString());
+    print('----------loadDownloadImages---------------end');
+
+    setState(() {
+      _files = files;
+    });
+  }
+
+  List<Widget> buildGridTileList(int number) {
+    List<Widget> widgetList = new List();
+    for (int i = 0; i < number; i++) {
+      widgetList.add(getItemWidget(i));
+    }
+    return widgetList;
+  }
+
+  Widget getItemWidget(int index) {
+    return new  Image.file(File(_files[index].path),fit: BoxFit.cover);
+  }
 }
 
 class DownloadedPictureListState extends State<DownloadedPictureList> {
@@ -18,10 +75,11 @@ class DownloadedPictureListState extends State<DownloadedPictureList> {
         title: new Text('我的下载'),
       ),
       body: Center(
-        child: new Text('下载列表'),
+        child: new PictureGridView(),
       ),
     );
   }
+
   @override
   void initState() {
     // TODO: implement initState
