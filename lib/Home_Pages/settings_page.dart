@@ -34,11 +34,11 @@ class SettingPage extends StatelessWidget {
                   title: Text('我的下载'),
                   icon: Icon(Icons.folder_special),
                   onTap: (TapUpDetails details) => {
-                  Navigator.of(context)
-                      .push(new MaterialPageRoute(builder: (context) {
-                    return new DownloadedPictureList();
-                  }))
-                  }),
+                        Navigator.of(context)
+                            .push(new MaterialPageRoute(builder: (context) {
+                          return new DownloadedPictureList();
+                        }))
+                      }),
               buildSeparator(),
               new MyPageItem(
                   title: Text('加入VIP'),
@@ -70,24 +70,27 @@ class MyPageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-      child: new GestureDetector(
-        onTapUp: this.onTap,
-        child: new Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                icon,
-                Padding(
-                  padding: EdgeInsets.only(left: 15),
-                  child: title,
-                ),
-              ],
-            ),
-            Icon(Icons.navigate_next),
-          ],
+    return InkWell(
+      onTap: (){},
+      child: new Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+        child: new GestureDetector(
+          onTapUp: this.onTap,
+          child: new Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  icon,
+                  Padding(
+                    padding: EdgeInsets.only(left: 15),
+                    child: title,
+                  ),
+                ],
+              ),
+              Icon(Icons.navigate_next),
+            ],
+          ),
         ),
       ),
     );
