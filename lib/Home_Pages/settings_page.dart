@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photo_atlas/Me_Pages/downloaded_picture_page.dart';
 import 'package:photo_atlas/Me_Pages/favorite_page.dart';
 
 class SettingPage extends StatelessWidget {
@@ -32,7 +33,12 @@ class SettingPage extends StatelessWidget {
               new MyPageItem(
                   title: Text('我的下载'),
                   icon: Icon(Icons.folder_special),
-                  onTap: (TapUpDetails details) => {}),
+                  onTap: (TapUpDetails details) => {
+                  Navigator.of(context)
+                      .push(new MaterialPageRoute(builder: (context) {
+                    return new DownloadedPictureList();
+                  }))
+                  }),
               buildSeparator(),
               new MyPageItem(
                   title: Text('加入VIP'),
