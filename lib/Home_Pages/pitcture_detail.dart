@@ -180,27 +180,7 @@ class _PicturePreviewState extends State<PicturePreview> {
           IconButton(
             icon: Icon(icon),
             onPressed: () async {
-              print('----------download---------------start');
-              print('download picture');
-              print('url:' + _imgList[_current]);
-              print('----------download---------------end');
-
-              Directory dir = await getApplicationDocumentsDirectory();
-              print('dir:' + dir.toString());
-              String pathName = p.join(dir.path, "aaa.png");
-              print('pathName:' + pathName);
-
-              Dio dio = new Dio();
-
-              await dio.download(_imgList[_current], pathName,
-                  options: Options(headers: apiHeaders),
-                  // disable gzip
-                  onReceiveProgress: (received, total) {
-                if (total != -1) {
-                  print((received / total * 100).toStringAsFixed(0) + "%");
-                }
-              });
-
+              await downLoadPicture();
             },
             color: color,
           ),
@@ -252,5 +232,44 @@ class _PicturePreviewState extends State<PicturePreview> {
             ]),
       ),
     );
+  }
+
+  Future downLoadPicture() async {
+    print('----------download---------------start');
+    print('download picture');
+    print('url:' + _imgList[_current]);
+    print('----------download---------------end');
+    
+    // 截取图片名称
+    String pictureName = getPictureFileName();
+    
+    Directory dir = await getApplicationDocumentsDirectory();
+    print('dir:' + dir.toString());
+    String pathName = p.join(dir.path, pictureName);
+    print('pathName:' + pathName);
+    
+    Dio dio = new Dio();
+    await dio.download(_imgList[_current], pathName,
+        options: Options(headers: apiHeaders),
+        // disable gzip
+        onReceiveProgress: (received, total) {
+      if (total != -1) {
+        print((received / total * 100).toStringAsFixed(0) + "%");
+      }
+    });
+  }
+
+  String getPictureFileName() {
+    // 截取图片名称
+    String pictureUrl = _imgList[_current];
+    pictureUrl.lastIndexOf('/');
+    // 时间戳 + 图片名
+    String pictureName = currentTimeMillis().toString()+pictureUrl.substring(pictureUrl.lastIndexOf('/') + 1, pictureUrl.length);
+    print('pictureName:' + pictureName);
+    return pictureName;
+  }
+
+  static int currentTimeMillis() {
+    return new DateTime.now().millisecondsSinceEpoch;
   }
 }
