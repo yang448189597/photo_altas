@@ -27,17 +27,17 @@ class GridViewState extends State {
   Widget build(BuildContext context) => new GridView.count(
       primary: false,
       padding: const EdgeInsets.all(8.0),
+
       mainAxisSpacing: 8.0,
-      //竖向间距
-      crossAxisCount: 2,
-      //横向Item的个数
       crossAxisSpacing: 8.0,
+      crossAxisCount: 2,
+      childAspectRatio: 3/ 4,
+
       //横向间距
       children: buildGridTileList(_files.length));
 
   Future loadDownloadImages() async {
     print('----------loadDownloadImages---------------start');
-
 
     Directory dir = await getApplicationDocumentsDirectory();
     String dirString = dir.path;
@@ -63,7 +63,7 @@ class GridViewState extends State {
   }
 
   Widget getItemWidget(int index) {
-    return new  Image.file(File(_files[index].path),fit: BoxFit.cover);
+    return new  Image.file(File(_files[index].path),fit: BoxFit.cover,);
   }
 }
 
