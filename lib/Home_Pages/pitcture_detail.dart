@@ -9,7 +9,6 @@ import 'package:photo_atlas/API/api_host.dart';
 import 'package:photo_atlas/Home_Widget/favoriteWidget.dart';
 import 'package:photo_atlas/Model/Favorite.dart';
 
-import 'package:network_to_file_image/network_to_file_image.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
@@ -40,14 +39,6 @@ class _PicturePreviewState extends State<PicturePreview> {
   int _current = 0;
 
   List _imgList = new List();
-
-  Future<File> file(String filename) async {
-    Directory dir = await getApplicationDocumentsDirectory();
-    print('dir:' + dir.toString());
-    String pathName = p.join(dir.path, filename);
-    print('pathName:' + pathName);
-    return File(pathName);
-  }
 
   @override
   void initState() {
@@ -193,32 +184,23 @@ class _PicturePreviewState extends State<PicturePreview> {
               print('download picture');
               print('url:' + _imgList[_current]);
               print('----------download---------------end');
-//
-//              Directory dir = await getApplicationDocumentsDirectory();
-//              print('dir:' + dir.toString());
-//              String pathName = p.join(dir.path, "aaa.png");
-//              print('pathName:' + pathName);
-//
-//              Dio dio = new Dio();
-//
-//              await dio.download(_imgList[_current], pathName,
-//                  options: Options(
-//                      headers: {HttpHeaders.acceptEncodingHeader: apiHeaders})
-////                  onProgress: (received, total) {
-////                if (total != -1) {
-////                  print((received / total * 100).toStringAsFixed(0) + "%");
-////                }
-//              );
 
-//              File temp = await file('aaa.png');
-//              NetworkToFileImage(
-//                  file: temp,
-//                  url: _imgList[_current],
-//                  debug: true,
-//                  headers: apiHeaders,
-//              processError: (error) {
-//                    print(error);
-//              });
+              Directory dir = await getApplicationDocumentsDirectory();
+              print('dir:' + dir.toString());
+              String pathName = p.join(dir.path, "aaa.png");
+              print('pathName:' + pathName);
+
+              Dio dio = new Dio();
+
+              await dio.download(_imgList[_current], pathName,
+                  options: Options(headers: apiHeaders),
+                  // disable gzip
+                  onReceiveProgress: (received, total) {
+                if (total != -1) {
+                  print((received / total * 100).toStringAsFixed(0) + "%");
+                }
+              });
+
             },
             color: color,
           ),
