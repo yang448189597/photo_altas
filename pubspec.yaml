@@ -38,6 +38,8 @@ dependencies:
 
   network_to_file_image: ^1.0.4
 
+  image_downloader: ^0.14.0
+
   provide: ^1.0.2 #数据管理层
 
 dev_dependencies:

@@ -119,7 +119,7 @@ class _PicturePreviewState extends State<PicturePreview> {
   Widget build(BuildContext context) {
     // 图片轮播器
     final _pictureSlider = CarouselSlider(
-      height: 600,
+      height: 450,
       items: map<Widget>(
         _imgList,
         (index, i) {
@@ -131,7 +131,7 @@ class _PicturePreviewState extends State<PicturePreview> {
                 Image.network(
                   _imgList[index],
                   fit: BoxFit.cover,
-                  height: 600,
+                  height: 450,
                   width: 1000.0,
                   headers: apiHeaders,
                 ),
@@ -193,15 +193,32 @@ class _PicturePreviewState extends State<PicturePreview> {
               print('download picture');
               print('url:' + _imgList[_current]);
               print('----------download---------------end');
-              File temp = await file('aaa.png');
-              NetworkToFileImage(
-                  file: temp,
-                  url: _imgList[_current],
-                  debug: true,
-                  headers: apiHeaders,
-              processError: (error) {
-                    print(error);
-              });
+//
+//              Directory dir = await getApplicationDocumentsDirectory();
+//              print('dir:' + dir.toString());
+//              String pathName = p.join(dir.path, "aaa.png");
+//              print('pathName:' + pathName);
+//
+//              Dio dio = new Dio();
+//
+//              await dio.download(_imgList[_current], pathName,
+//                  options: Options(
+//                      headers: {HttpHeaders.acceptEncodingHeader: apiHeaders})
+////                  onProgress: (received, total) {
+////                if (total != -1) {
+////                  print((received / total * 100).toStringAsFixed(0) + "%");
+////                }
+//              );
+
+//              File temp = await file('aaa.png');
+//              NetworkToFileImage(
+//                  file: temp,
+//                  url: _imgList[_current],
+//                  debug: true,
+//                  headers: apiHeaders,
+//              processError: (error) {
+//                    print(error);
+//              });
             },
             color: color,
           ),
