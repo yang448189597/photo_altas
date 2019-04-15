@@ -54,58 +54,60 @@ class FavoriteListState extends State<FavoriteList> {
             //取出Json 字符串
             Map<String, dynamic> data = json.decode(_data[index]);
 
-            return GestureDetector(
-              onTap: () {
+            return InkWell(
+             onTap: (){},
+              child: GestureDetector(
+                onTap: () {
+                  // 跳转 图片详情页面
+                  Navigator.of(context)
+                      .push(new MaterialPageRoute(builder: (context) {
+                    return new PicturePreview(
+                      // 传递一组图片Url 和 图片标题
+                      firstPictureUrl: data['firstPictureUrl'],
+                      pictureListUrl: data['pictureListUrl'],
+                      pictureTitle: data['pictureListTitle'].toString(),
+                    );
+                  }));
 
-                // 跳转 图片详情页面
-                Navigator.of(context)
-                    .push(new MaterialPageRoute(builder: (context) {
-                  return new PicturePreview(
-                    // 传递一组图片Url 和 图片标题
-                    firstPictureUrl: data['firstPictureUrl'],
-                    pictureListUrl: data['pictureListUrl'],
-                    pictureTitle: data['pictureListTitle'].toString(),
-                  );
-                }));
-
-              },
-              child: Dismissible(
-                key: new Key(itemDat),
-                onDismissed: (direction) {
-                  _data.removeAt(index);
-                  Scaffold.of(context).showSnackBar(
-                      new SnackBar(content: new Text("$_data dismissed")));
                 },
-                background: new Container(
-                  color: Colors.red,
-                ),
-                child: new Row(
-                  children: <Widget>[
-                    new Container(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(4),
-                        child: new Image.network(
-                          data['firstPictureUrl'],
-                          width: 130.0,
-                          height: 80.0,
-                          fit: BoxFit.cover,
-                          headers: apiHeaders,
-                        ),
-                      ),
-                      margin: EdgeInsets.all(10.0),
-                    ),
-                    new Expanded(
-                      child: new Column(
-                        children: <Widget>[
-                          new Container(
-                            height: 70.0,
-                            child: new Text(data['pictureListTitle'].toString()),
+                child: Dismissible(
+                  key: new Key(itemDat),
+                  onDismissed: (direction) {
+                    _data.removeAt(index);
+                    Scaffold.of(context).showSnackBar(
+                        new SnackBar(content: new Text("$_data dismissed")));
+                  },
+                  background: new Container(
+                    color: Colors.red,
+                  ),
+                  child: new Row(
+                    children: <Widget>[
+                      new Container(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(4),
+                          child: new Image.network(
+                            data['firstPictureUrl'],
+                            width: 130.0,
+                            height: 80.0,
+                            fit: BoxFit.cover,
+                            headers: apiHeaders,
                           ),
-                        ],
+                        ),
+                        margin: EdgeInsets.all(10.0),
                       ),
-                      flex: 1,
-                    ),
-                  ],
+                      new Expanded(
+                        child: new Column(
+                          children: <Widget>[
+                            new Container(
+                              height: 70.0,
+                              child: new Text(data['pictureListTitle'].toString()),
+                            ),
+                          ],
+                        ),
+                        flex: 1,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );
