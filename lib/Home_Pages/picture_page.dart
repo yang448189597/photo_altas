@@ -20,9 +20,9 @@ class PicturePageState extends State<PicturePage>
         title: Text('美女'),
         bottom: TabBar(
             controller: _controller,
-            indicatorColor: Colors.red[600],
+            indicatorColor: Colors.redAccent,
             indicatorWeight: 3.0,
-            labelColor: Colors.red[600],
+            labelColor: Colors.redAccent,
             unselectedLabelColor: Colors.white,
             tabs: [
               Tab(text: '日榜',),

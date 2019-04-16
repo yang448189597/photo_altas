@@ -3,6 +3,8 @@ import 'package:photo_atlas/Home_Pages/home_page.dart';
 import 'package:photo_atlas/Home_Pages/picture_page.dart';
 import 'package:photo_atlas/Home_Pages/settings_page.dart';
 
+import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
+
 // Demo 2
 class BottomBar extends StatelessWidget {
   @override
@@ -28,58 +30,39 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
 
   @override
   void initState() {
-    listWidget
-      ..add(HomePage())
-      ..add(PicturePage())
-      ..add(SettingPage());
+    listWidget..add(HomePage())..add(PicturePage())..add(SettingPage());
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: listWidget[_currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                ),
-                title: Text(
-                  '主页',
-                  style: TextStyle(color: _bottomColor),
-                )),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.picture_in_picture,
-                ),
-                title: Text(
-                  '美女',
-                  style: TextStyle(color: _bottomColor),
-                )),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.settings,
-                ),
-                title: Text(
-                  '我的',
-                  style: TextStyle(color: _bottomColor),
-                )),
-          ],
-
-          //  底部导航索引
-          currentIndex: _currentIndex,
-
-          fixedColor: Colors.red,
-
-          //  添加底部导航的点击事件
-          onTap: (int index){
-            setState(() {
-              // 切换页面 相对应页面的Index
-              _currentIndex = index;
-            });
-          },
-        ));
+    return SafeArea(
+      child: Scaffold(
+          body: listWidget[_currentIndex],
+          bottomNavigationBar: FancyBottomNavigation(
+            tabs: [
+              TabData(
+                  iconData: Icons.home,
+                  title: "主页",
+                  onclick: () {}),
+              TabData(
+                  iconData: Icons.image,
+                  title: "妹子",
+                  onclick: () {}),
+              TabData(iconData: Icons.settings, title: "设置")
+            ],
+            initialSelection: 1,
+            circleColor: Colors.redAccent,
+            barBackgroundColor: Colors.black,
+            textColor: Colors.white,
+            inactiveIconColor: Colors.white,
+            onTabChangedListener: (position) {
+              setState(() {
+                _currentIndex = position;
+              });
+            },
+          )),
+    );
   }
 }

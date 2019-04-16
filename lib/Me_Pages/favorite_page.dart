@@ -55,21 +55,20 @@ class FavoriteListState extends State<FavoriteList> {
             Map<String, dynamic> data = json.decode(_data[index]);
 
             return InkWell(
-             onTap: (){},
+             onTap: (){
+               // 跳转 图片详情页面
+               Navigator.of(context)
+                   .push(new MaterialPageRoute(builder: (context) {
+                 return new PicturePreview(
+                   // 传递一组图片Url 和 图片标题
+                   firstPictureUrl: data['firstPictureUrl'],
+                   pictureListUrl: data['pictureListUrl'],
+                   pictureTitle: data['pictureListTitle'].toString(),
+                 );
+               }));
+             },
               child: GestureDetector(
-                onTap: () {
-                  // 跳转 图片详情页面
-                  Navigator.of(context)
-                      .push(new MaterialPageRoute(builder: (context) {
-                    return new PicturePreview(
-                      // 传递一组图片Url 和 图片标题
-                      firstPictureUrl: data['firstPictureUrl'],
-                      pictureListUrl: data['pictureListUrl'],
-                      pictureTitle: data['pictureListTitle'].toString(),
-                    );
-                  }));
 
-                },
                 child: Dismissible(
                   key: new Key(itemDat),
                   onDismissed: (direction) {
