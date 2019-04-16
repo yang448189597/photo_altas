@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+import 'package:photo_atlas/Me_Pages/downloader_picture_preview.dart';
 
 class DownloadedPictureList extends StatefulWidget {
   @override
@@ -14,24 +15,21 @@ class PictureGridView extends StatefulWidget {
 }
 
 class GridViewState extends State {
-
   List<FileSystemEntity> _files = [];
   @override
   void initState() {
     super.initState();
     loadDownloadImages();
-
   }
 
   @override
   Widget build(BuildContext context) => new GridView.count(
       primary: false,
       padding: const EdgeInsets.all(8.0),
-
       mainAxisSpacing: 8.0,
       crossAxisSpacing: 8.0,
       crossAxisCount: 2,
-      childAspectRatio: 3/ 4,
+      childAspectRatio: 3 / 4,
 
       //横向间距
       children: buildGridTileList(_files.length));
@@ -44,7 +42,7 @@ class GridViewState extends State {
     print('----------dirString---------------start' + dirString);
     var directory = Directory(dirString);
     print('----------directory---------------start' + directory.toString());
-    List<FileSystemEntity>  files  = directory.listSync();
+    List<FileSystemEntity> files = directory.listSync();
     print(files);
     print('files length' + files.length.toString());
     print('----------loadDownloadImages---------------end');
@@ -63,7 +61,18 @@ class GridViewState extends State {
   }
 
   Widget getItemWidget(int index) {
-    return new  Image.file(File(_files[index].path),fit: BoxFit.cover,);
+    return GestureDetector(
+      onTap: (){
+        // 跳转 预览页面
+        Navigator.of(context)
+            .push(new MaterialPageRoute(builder: (context) {
+          return new PictureView(filePath: _files[index].path,);
+        }));
+      },
+        child: new Image.file(
+      File(_files[index].path),
+      fit: BoxFit.cover,
+    ));
   }
 }
 
