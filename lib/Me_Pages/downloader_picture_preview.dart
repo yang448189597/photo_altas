@@ -18,13 +18,16 @@ class PictureViewState extends State<PictureView> {
         title: new Text('图片预览'),
       ),
 
-      body: Container(
-        child: PhotoView(
-          imageProvider: FileImage(File(widget.filePath)),
+      body: Center(
+        child: Container(
+          child: PhotoView(
+            imageProvider: FileImage(File(widget.filePath)),
+          ),
         ),
       ),
     );
   }
+
   @override
   void initState() {
     // TODO: implement initState

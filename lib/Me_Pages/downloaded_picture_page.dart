@@ -28,7 +28,7 @@ class GridViewState extends State {
       padding: const EdgeInsets.all(8.0),
       mainAxisSpacing: 8.0,
       crossAxisSpacing: 8.0,
-      crossAxisCount: 2,
+      crossAxisCount: 3,
       childAspectRatio: 3 / 4,
 
       //横向间距
@@ -61,18 +61,21 @@ class GridViewState extends State {
   }
 
   Widget getItemWidget(int index) {
-    return GestureDetector(
-      onTap: (){
-        // 跳转 预览页面
-        Navigator.of(context)
-            .push(new MaterialPageRoute(builder: (context) {
-          return new PictureView(filePath: _files[index].path,);
-        }));
-      },
-        child: new Image.file(
-      File(_files[index].path),
-      fit: BoxFit.cover,
-    ));
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8),
+      child: GestureDetector(
+        onTap: (){
+          // 跳转 预览页面
+          Navigator.of(context)
+              .push(new MaterialPageRoute(builder: (context) {
+            return new PictureView(filePath: _files[index].path,);
+          }));
+        },
+          child: new Image.file(
+        File(_files[index].path),
+        fit: BoxFit.cover,
+      )),
+    );
   }
 }
 
@@ -83,8 +86,10 @@ class DownloadedPictureListState extends State<DownloadedPictureList> {
       appBar: new AppBar(
         title: new Text('我的下载'),
       ),
-      body: Center(
-        child: new PictureGridView(),
+      body: SafeArea(
+        child: Center(
+          child: new PictureGridView(),
+        ),
       ),
     );
   }

@@ -6,7 +6,10 @@ class SettingPage extends StatelessWidget {
   Widget buildSeparator({double leftSpace = 16}) {
     return new Padding(
       padding: EdgeInsets.only(left: leftSpace),
-      child: Divider(color: Colors.black54,height: 1,),
+      child: Divider(
+        color: Colors.black54,
+        height: 1,
+      ),
     );
   }
 
@@ -17,46 +20,61 @@ class SettingPage extends StatelessWidget {
           title: Text('我的'),
         ),
         body: Padding(
-          padding: const EdgeInsets.only(top:20.0),
+          padding: const EdgeInsets.only(top: 20.0),
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                buildSeparator(leftSpace: 0),
                 new MyPageItem(
-                    title: Text('我的收藏'),
-                    icon: Icon(Icons.favorite_border),
+                    title: Text(
+                      '我的收藏',
+                      style: TextStyle(fontSize: 16, letterSpacing: 3.0),
+                    ),
+                    icon: Icon(
+                      Icons.favorite,
+                      color: Colors.redAccent,
+                    ),
                     onTap: (TapUpDetails details) => {
                           Navigator.of(context)
                               .push(new MaterialPageRoute(builder: (context) {
                             return new FavoriteList();
                           }))
                         }),
-                buildSeparator(),
                 new MyPageItem(
-                    title: Text('我的下载'),
-                    icon: Icon(Icons.folder_special),
+                    title: Text(
+                      '我的下载',
+                      style: TextStyle(fontSize: 16, letterSpacing: 3.0),
+                    ),
+                    icon: Icon(Icons.folder_special, color: Colors.redAccent),
                     onTap: (TapUpDetails details) => {
                           Navigator.of(context)
                               .push(new MaterialPageRoute(builder: (context) {
                             return new DownloadedPictureList();
                           }))
                         }),
-                buildSeparator(),
                 new MyPageItem(
-                    title: Text('加入VIP'),
-                    icon: Icon(Icons.favorite_border),
+                    title: Text(
+                      '加入VIP',
+                      style: TextStyle(fontSize: 16, letterSpacing: 3.0),
+                    ),
+                    icon: Icon(Icons.group_add, color: Colors.redAccent),
                     onTap: (TapUpDetails details) => {}),
-                buildSeparator(),
                 new MyPageItem(
-                    title: Text('分享'),
-                    icon: Icon(Icons.share),
-                    onTap: (TapUpDetails details) => {}),
-                buildSeparator(),
+                    title: Text(
+                      '分享',
+                      style: TextStyle(fontSize: 16, letterSpacing: 3.0),
+                    ),
+                    icon: Icon(Icons.share, color: Colors.redAccent),
+                    onTap: (
+                      TapUpDetails details,
+                    ) =>
+                        {}),
                 new MyPageItem(
-                    title: Text('设置'),
-                    icon: Icon(Icons.settings),
+                    title: Text(
+                      '设置',
+                      style: TextStyle(fontSize: 16, letterSpacing: 3.0),
+                    ),
+                    icon: Icon(Icons.settings, color: Colors.redAccent),
                     onTap: (TapUpDetails details) => {}),
-                buildSeparator(leftSpace: 0),
               ],
             ),
           ),
@@ -73,27 +91,32 @@ class MyPageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: (){},
-      child: new Container(
-        height: 50,
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-        child: new GestureDetector(
-          onTapUp: this.onTap,
-          child: new Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  icon,
-                  Padding(
-                    padding: EdgeInsets.only(left: 15),
-                    child: title,
-                  ),
-                ],
-              ),
-              Icon(Icons.navigate_next),
-            ],
+    return Card(
+      child: InkWell(
+        onTap: () {},
+        child: new Container(
+          height: 50,
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+          child: new GestureDetector(
+            onTapUp: this.onTap,
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    icon,
+                    Padding(
+                      padding: EdgeInsets.only(left: 15),
+                      child: title,
+                    ),
+                  ],
+                ),
+                Icon(
+                  Icons.navigate_next,
+                  color: Colors.redAccent,
+                ),
+              ],
+            ),
           ),
         ),
       ),
