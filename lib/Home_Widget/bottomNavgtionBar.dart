@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:photo_atlas/Home_Pages/home_page.dart';
-import 'package:photo_atlas/Home_Pages/picture_page.dart';
-import 'package:photo_atlas/Home_Pages/settings_page.dart';
+import 'package:photo_atlas/App_Picture_Pages/home_page.dart';
+import 'package:photo_atlas/App_Picture_Pages/picture_page.dart';
+import 'package:photo_atlas/App_Picture_Pages/settings_page.dart';
 
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 
@@ -52,7 +52,7 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
                   onclick: () {}),
               TabData(iconData: Icons.settings, title: "设置")
             ],
-            initialSelection: 1,
+            initialSelection: 0,
             circleColor: Colors.redAccent,
             barBackgroundColor: Colors.black,
             textColor: Colors.white,

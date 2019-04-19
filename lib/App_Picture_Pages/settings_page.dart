@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:photo_atlas/Me_Pages/downloaded_picture_page.dart';
-import 'package:photo_atlas/Me_Pages/favorite_page.dart';
+import 'package:photo_atlas/App_Me_Pages/downloaded_picture_page.dart';
+import 'package:photo_atlas/App_Me_Pages/favorite_page.dart';
 
 class SettingPage extends StatelessWidget {
   Widget buildSeparator({double leftSpace = 16}) {

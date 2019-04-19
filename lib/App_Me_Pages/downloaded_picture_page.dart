@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
-import 'package:photo_atlas/Me_Pages/downloader_picture_preview.dart';
+import 'package:photo_atlas/App_Me_Pages/downloader_picture_preview.dart';
 
 class DownloadedPictureList extends StatefulWidget {
   @override

@@ -44,6 +44,8 @@ dependencies:
 
   provide: ^1.0.2 #数据管理层
 
+  http: ^0.12.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

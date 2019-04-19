@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:photo_atlas/API/api_host.dart';
-import 'package:photo_atlas/Home_Pages/pitcture_detail.dart';
+import 'package:photo_atlas/App_Picture_Pages/pitcture_detail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FavoriteList extends StatefulWidget {
@@ -74,6 +74,7 @@ class FavoriteListState extends State<FavoriteList> {
                     key: new Key(itemDat),
                     onDismissed: (direction) {
                       _data.removeAt(index);
+                      //Todo  移除图片组
                       Scaffold.of(context).showSnackBar(
                           new SnackBar(content: new Text("$_data dismissed")));
                     },
@@ -89,6 +90,7 @@ class FavoriteListState extends State<FavoriteList> {
                               data['firstPictureUrl'],
                               width: 130.0,
                               height: 80.0,
+//                              scale: 2,
                               fit: BoxFit.cover,
                               headers: apiHeaders,
                             ),
